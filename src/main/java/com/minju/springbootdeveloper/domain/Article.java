@@ -1,12 +1,14 @@
 package com.minju.springbootdeveloper.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) //기본생성자
 public class Article {
@@ -21,6 +23,14 @@ public class Article {
 
     @Column(name="content", nullable=false)
     private String content;
+
+    @CreatedDate //엔티티가 생성될 때 생성된 시간을 저장
+    @Column(name="created_at")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate //엔티티가 수정될 때 마지막으로 수정된 시간을 저장
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @Builder
     public Article(String title, String content){
